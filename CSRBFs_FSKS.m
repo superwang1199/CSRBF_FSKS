@@ -39,7 +39,7 @@ N5=[27 125 729 4913 8000];
 %% 
 name = sprintf('yuanzhu_%d',N5(K));load(name);
 xdata=dsites1(:,1)/2; ydata=dsites1(:,2)/2; zdata=dsites1(:,3)/2; 
-intdata = [xdata,ydata,zdata];  %�ڵ�
+intdata = [xdata,ydata,zdata];  %ÄÚµã
 if sn==3
     sn=2;
 end
@@ -148,3 +148,13 @@ toc
 pfTe = nEM*u;  
 pfTi = nEM*v;
 pfTr = nEM*w;
+  function DM = DistanceMatrixCSRBF(dsites,ctrs,ep)
+  DM=DistanceMatrix(dsites,ctrs);
+  DM=1-ep*DM;
+  DM(DM<0)=0;
+  end
+  function DM = DifferenceMatrix(datacoord,centercoord)
+  [dr,cc] = ndgrid(datacoord(:),centercoord(:));
+  DM = dr-cc;
+  end
+  
